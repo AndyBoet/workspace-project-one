@@ -70,6 +70,8 @@ cpdefine("inline:com-chilipeppr-workspace-project-one", ["chilipeppr_ready"], fu
             
             this.loadTemplateWidget();
             
+            this.load3DWidget();
+            
             // Create our workspace upper right corner triangle menu
             this.loadWorkspaceMenu();
             // Add our billboard to the menu (has name, url, picture of workspace)
@@ -137,6 +139,30 @@ cpdefine("inline:com-chilipeppr-workspace-project-one", ["chilipeppr_ready"], fu
                     );
                 }
             );
+        },
+        
+        /**
+         * Load the 3D widget via chilipeppr.load()
+         */
+        load3DWidget: function(callback) {
+
+            var that = this;
+
+            chilipeppr.load(
+  "#com-chilipeppr-widget-3d-instance",
+  "http://raw.githubusercontent.com/chilipeppr/widget-3dviewer/master/auto-generated-widget.html",
+  function() {
+    // Callback after widget loaded into #myDivWidgetInsertedInto
+    cprequire(
+      ["inline:com-chilipeppr-widget-3d"], // the id you gave your widget
+      function(mywidget) {
+        // Callback that is passed reference to your newly loaded widget
+        console.log("My widget just got loaded.", mywidget);
+        mywidget.init();
+      }
+    );
+  }
+);
         },
         /**
          * Load the Serial Port JSON Server widget via chilipeppr.load()
